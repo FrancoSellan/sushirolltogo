@@ -1,40 +1,36 @@
-# SushiRoll · Sueldos
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-App para liquidar los sueldos semanales (cocina, delivery, empaque y encargado/cajero) y exportar el PDF.
+## Getting Started
 
-## Usarla en tu compu
+First, run the development server:
 
 ```bash
-npm install
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Abrí http://localhost:3000. La contraseña está en `.env.local` (`APP_PASSWORD`).
-Los datos quedan en `data/sushiroll.db`.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Para cargar los empleados iniciales (sólo si la base está vacía):
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```bash
-node --env-file=.env.local scripts/seed.mjs
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Cómo funciona
+## Learn More
 
-- **Empleados**: alta, edición, baja y desactivación. Cocina cobra por hora, empaque por día, encargado/cajero un fijo semanal y delivery un monto que cargás a mano cada semana. Doble rol = crear la persona dos veces, una por rol.
-- **Semanas** (lunes a domingo): al crear una semana se cargan todos los empleados activos. Cargás horas, adelantos y notas; se guarda solo.
-- **Formulario de empaque**: `/empaque` es público (no pide contraseña). Lo que marquen se carga en la semana abierta más reciente: días trabajados + días dobles (cada doble cuenta como un día más). Si alguien lo manda dos veces, vale el último envío.
-- **Cerrar semana**: congela los valores. Los cambios de sueldo en Empleados no tocan semanas cerradas.
-- **PDF**: botón "Descargar PDF" en cada semana.
+To learn more about Next.js, take a look at the following resources:
 
-## Subirla a internet (Vercel + Turso)
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-1. Crear una base gratis en https://turso.tech y copiar la **URL** (`libsql://...`) y el **token**.
-2. Subir esta carpeta a un repositorio privado de GitHub.
-3. En https://vercel.com importar el repositorio y definir las variables de entorno:
-   - `APP_PASSWORD`: tu contraseña
-   - `AUTH_SECRET`: un texto largo y aleatorio
-   - `DATABASE_URL`: la URL de Turso
-   - `DATABASE_AUTH_TOKEN`: el token de Turso
-4. Cargar los empleados en la base de producción:
-   `DATABASE_URL=libsql://... DATABASE_AUTH_TOKEN=... node scripts/seed.mjs`
-5. En el celular, abrí la URL y usá "Agregar a pantalla de inicio".
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
